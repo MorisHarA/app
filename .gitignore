@@ -1,0 +1,70 @@
+# Editor directories and files
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Idea
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/dictionaries
+.idea/**/dataSources/
+.idea/**/dataSources.ids
+.idea/**/dataSources.xml
+.idea/**/dataSources.local.xml
+.idea/**/sqlDataSources.xml
+.idea/**/dynamic.xml
+.idea/**/uiDesigner.xml
+.idea/**/gradle.xml
+.idea/**/libraries
+.idea/**/mongoSettings.xml
+.project
+*.iws
+/out/
+.idea_modules/
+
+# MacOSX
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# NodeJS
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Compiled binary addons (http://nodejs.org/api/addons.html)
+dist/
+build/Release
+
+# Dependency directories
+node_modules
+jspm_packages
+
+#Karma
+test/unit/coverage
+
+#atom
+*.swp
+*~
+.DS_Store
+Thumbs.db
+.project
+.svn
+.nvm-version
+node_modules
+npm-debug.log
+debug.log
+/tags
+/atom-shell/
+/out/
+docs/output
+docs/includes
+spec/fixtures/evil-files/
+out/
+/electron/
+
+
