@@ -1,37 +1,35 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import {myPlugin} from './plugins'
+import 'babel-polyfill';
+import Vue from 'vue';
+import Vuex from 'vuex';
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
-const debug = process.env.NODE_ENV !== 'production'
+const debug = process.env.NODE_ENV !== 'production';
 
-const context = require.context('./modules', false, /\.js$/)
-
-const modules = (context) =>{
-  const obj = {}
-  context.keys().map(key =>{
-    obj[key.slice(2,-3)] = context(key).default
-  })
-  return obj
-}
+const generateModules = () => {
+  const context = require.context('./modules', false, /\.js$/);
+  return {
+    modules: context.keys().reduce((r, key) =>
+    ({ ...r, [key.slice(2, -3)]: context(key).default }), {}),
+    context,
+  };
+};
 
 const store = new Vuex.Store({
-  modules: modules(context),
-  plugins: [myPlugin],
-  strict: debug
-})
+  modules: generateModules().modules,
+  plugins: [],
+  strict: debug,
+});
 
-
-//TODO
 if (module.hot) {
-  module.hot.accept(['./modules/login.js'], () => {
-    alert(222)
+  const files = generateModules().context
+    .keys()
+    .map(m => m.replace('./', './modules/'));
+  module.hot.accept(files, () => {
     store.hotUpdate({
-      modules: modules(context)
-    })
-  })
+      modules: generateModules().modules,
+    });
+  });
 }
 
-
-export default store
+export default store;

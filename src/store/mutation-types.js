@@ -1,1 +1,94 @@
-export const ADD_COUNT = 'ADD_COUNT'
+/** *******  filter  ******** */
+
+export const FETCH_DIVISIONS = 'FETCH_DIVISIONS';
+
+export const FETCH_REGIONS = 'FETCH_REGIONS';
+
+export const SET_INITDATA = 'SET_INITDATA';
+
+/** *******  comment  ******** */
+
+export const FETCH_COMMENTS = 'FETCH_COMMENTS';
+
+export const FETCH_COMMENT_COUNT = 'FETCH_COMMENT_COUNT';
+
+export const FETCH_REPLAY_TEMPLATES = 'FETCH_REPLAY_TEMPLATES';
+
+export const FETCH_HOSPITAL_DETAIL = 'FETCH_HOSPITAL_DETAIL';
+
+export const FETCH_DIVISIONS_COUNT = 'FETCH_DIVISIONS_COUNT';
+
+export const FETCH_COMMENT_STATISTICS = 'FETCH_COMMENT_STATISTICS';
+
+export const FETCH_AND_ASSIGNMENT = 'FETCH_AND_ASSIGNMENT';
+
+export const REPLY_COMMENT = 'REPLY_COMMENT';
+
+/** *******  questionnairedetail  ******** */
+
+export const SET_FILTER_LIST = 'SET_FILTER_LIST';
+
+export const FETCH_QUESTIONNAIRE = 'FETCH_QUESTIONNAIRE';
+
+export const FETCH_QUESTIONNAIRE_SUCCESS = 'FETCH_QUESTIONNAIRE_SUCCESS';
+
+/** *******  answersheetdetail  ******** */
+
+export const FETCH_ANSWERSHEET = 'FETCH_ANSWERSHEET';
+
+export const FETCH_ANSWERSHEET_SUCCESS = 'FETCH_ANSWERSHEET_SUCCESS';
+
+export const FETCH_ANSWERSHEET_ALL = 'FETCH_ANSWERSHEET_ALL';
+
+export const FETCH_ANSWERSHEET_ALL_SUCCESS = 'FETCH_ANSWERSHEET_ALL_SUCCESS';
+
+export const SET_FILTER_ALL_LIST = 'SET_FILTER_ALL_LIST';
+
+export const CLEAR_ANSWERSHEET_DATA = 'CLEAR_ANSWERSHEET_DATA';
+
+/** *******  login  ******** */
+
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+
+export const FETCH_USER_INFO_SUCCESS = 'FETCH_USER_INFO_SUCCESS';
+
+export const SET_AUTH_LIST = 'SET_AUTH_LIST';
+
+export const CLEAR_AUTH_LIST = 'CLEAR_AUTH_LIST';
+
+/** *******  questionnairestat  ******** */
+
+export const FETCH_CHARTDATA_SUCCESS = 'FETCH_CHARTDATA_SUCCESS';
+
+export const FETCH_QUESTIONNAIRESTAT_SUCCESS = 'FETCH_QUESTIONNAIRESTAT_SUCCESS';
+
+export const CLEAR_CHARTDATA = 'CLEAR_CHARTDATA';
+
+export const FETCH_REPLY_TEMPLATE_LIST = 'FETCH_REPLY_TEMPLATE_LIST';
+
+export const DELETE_TEMPLATE_SUCCESS = 'DELETE_TEMPLATE_SUCCESS';
+
+export const CREATE_TEMPLATE_SUCCESS = 'CREATE_TEMPLATE_SUCCESS';
+
+export const UPDATE_TEMPLATE_SUCCESS = 'UPDATE_TEMPLATE_SUCCESS';
+
+/** *******  loading  ******** */
+
+export const SET_LOADING = 'SET_LOADING';
+
+export const MODIFY_STATUS = 'MODIFY_STATUS';
+
+export const CHANGE_KEYWORD = 'CHANGE_KEYWORD';
+
+/** *******  authority  ******** */
+
+export const DELETE_AUTHORITY = 'DELETE_AUTHORITY';
+
+export const ADD_AUTHORITY = 'ADD_AUTHORITY';
+
+export const FETCH_AUTHORITY_LIST = 'FETCH_AUTHORITY_LIST';
+
+export const SET_AUTHORITY_ACTIVE_INDEX = 'SET_AUTHORITY_ACTIVE_INDEX';
+
+export const FETCH_MANAGE_USERS_SUCCESS = 'FETCH_MANAGE_USERS_SUCCESS';
+

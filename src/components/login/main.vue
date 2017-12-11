@@ -1,161 +1,181 @@
 <template>
   <div class="login-container">
     <div class="bg-container"></div>
-    <div class="display">
-      <div @click="changeCount" class="title">医院智能标签系统</div>
-      <img class="logo" src="./imgs/logo.png" alt="上海第六人民医院金山分院金山区中心医院">
-      <div class="hospital-name">{{getCount}}上海第六人民医院金山分院金山区中心医院</div>
-    </div>
-    <div class="login-wrap">
-      <div class="account-wrap">
-        <input class="account" type="text" placeholder="请输入账号">
-        <img class="account-img" src="./imgs/account.png" alt="账号">
+    <div class="wrapper">
+      <div class="login-wrap">
+        <img class="font-img" src="./imgs/login.png" >
+        <div class="txt">医院智能标签系统</div>
+        <div class="account-wrap">
+          <input
+            class="account"
+            type="text"
+            v-model.trim="username"
+            placeholder="请输入账号">
+          <img class="account-img" src="./imgs/account.png" alt="账号">
+        </div>
+        <div class="password-wrap">
+          <input
+            class="password"
+            type="password"
+            @keydown.enter="submit"
+            v-model="password"
+            placeholder="请输入密码">
+          <img class="password-img" src="./imgs/password.png" alt="密码">
+        </div>
+        <div @click="submit" :class="canSubmit? 'submit active': 'submit'">登录</div>
       </div>
-      <div class="password-wrap">
-        <input class="password" type="password" placeholder="请输入密码">
-        <img class="password-img" src="./imgs/password.png" alt="密码">
-      </div>
-      <div @click="login" class="submit">登录</div>
     </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  import {mapActions,mapGetters} from 'vuex'
-  export default {
-    computed:{
-      ...mapGetters([
-        'getCount'
-      ])
+import { mapActions } from 'vuex';
+import Message from 'iview/src/components/message';
+
+export default {
+  data() {
+    return {
+      username: '',
+      password: '',
+    };
+  },
+  computed: {
+    canSubmit() {
+      return this.username.length > 0 && this.password.length > 0;
     },
-    methods:{
-      login(){
-      	this.$router.push({
-          name:'hospital'
-      	})
-      },
-      ...mapActions([
-        'changeCount'
-      ])
-    }
-  }
+  },
+  methods: {
+    submit() {
+      const data = {
+        username: this.username,
+        password: this.password,
+      };
+      if (!data.username) {
+        Message.warning('请输入账号');
+        return;
+      }
+      if (!data.password) {
+        Message.warning('请输入密码');
+        return;
+      }
+      this.login(data);
+    },
+    ...mapActions('login', ['login']),
+  },
+};
 </script>
 
 <style scoped lang="less" rel="stylesheet/less">
-  .login-container{
+.login-container {
+  width: 100%;
+  min-width: 1150px;
+  min-height: 100vh;
+  background-color: #f6f8fc;
+  .bg-container {
     width: 100%;
-    min-height: 100vh;
-    background-color:#f6f8fc;
-    .bg-container{
-      width: 100%;
-      min-width: 1150px;
-      height: 294px;
-      overflow: hidden;
-      background-image: url(imgs/bg.png);
-      background-size: 1024px 294px;
-    }
-    .display{
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 294px;
-      min-width: 1150px;
-      .title{
-        font-size: 18px;
-        color: #c5dbf1;
-        margin-left: 34px;
-        margin-top: 21px;
+    min-width: 1150px;
+    height: 294px;
+    overflow: hidden;
+    background-image: url(imgs/bg.png);
+    background-size: 1024px 294px;
+  }
+  ::-webkit-input-placeholder {
+    color: #cccccc;
+  }
+  .wrapper {
+    width: 100%;
+    min-width: 1150px;
+    .login-wrap {
+      width: 422px;
+      height: 395px;
+      box-shadow: 0px 0px 3px #eceff5;
+      margin: -132px auto 0px auto;
+      background-color: #fff;
+      border-radius: 6px;
+      padding-top: 40px;
+      .font-img {
+        width: 234px;
+        margin-left: 100px;
       }
-      .logo{
-        display: block;
-        width: 70px;
-        height: 70px;
-        margin: 52px auto 0px auto;
+      .txt {
+        font-size: 16px;
+        color: #999999;
+        margin-left: 210px;
+        margin-bottom: 40px;
       }
-      .hospital-name{
-        width: 260px;
-        font-size: 18px;
-        color: #fff;
-        font-weight: bold;
-        text-align: center;
-        margin: 14px auto 0px auto;
-      }
-    }
-    ::-webkit-input-placeholder {
-      color:#cccccc
-    }
-    .login-wrap{
-      width: 100%;
-      min-width: 1150px;
-      .account-wrap{
-        width: 271px;
+      .account-wrap {
+        width: 328px;
         position: relative;
-        margin: 50px auto 0px auto;
-        height: 29px;
+        margin: 0 auto;
+        height: 41px;
         font-size: 14px;
         border-radius: 6px;
-        .account{
-          width: 271px;
+        .account {
+          width: 328px;
           display: block;
-          padding-left: 28px;
+          padding-left: 30px;
           box-sizing: border-box;
-          height: 29px;
-          border-radius: 6px;
+          height: 41px;
+          border-radius: 4px;
           outline: none;
           border: 1px solid #e5e5e5;
-          &:focus{
+          &:focus {
             border: 1px solid #157df2;
           }
         }
-        .account-img{
+        .account-img {
           width: 12px;
           height: 14px;
           position: absolute;
-          top: 7px;
-          left: 9px;
+          top: 13px;
+          left: 12px;
         }
       }
-      .password-wrap{
-        width: 271px;
+      .password-wrap {
+        width: 328px;
         position: relative;
-        margin: 12px auto 0px auto;
-        height: 29px;
+        margin: 18px auto 0px auto;
+        height: 41px;
         font-size: 14px;
         border-radius: 6px;
-        .password{
-          width: 271px;
+        .password {
+          width: 328px;
           display: block;
-          padding-left: 28px;
+          padding-left: 30px;
           box-sizing: border-box;
-          height: 29px;
-          border-radius: 6px;
+          height: 41px;
+          border-radius: 4px;
           outline: none;
           border: 1px solid #e5e5e5;
-          &:focus{
+          &:focus {
             border: 1px solid #157df2;
           }
         }
-        .password-img{
+        .password-img {
           width: 12px;
           height: 14px;
           position: absolute;
-          top: 7px;
-          left: 9px;
+          top: 13px;
+          left: 12px;
         }
       }
-      .submit{
-        width: 275px;
-        height: 31px;
-        background-color: #157df2;
-        margin: 19px auto 0px auto;
+      .submit {
+        width: 328px;
+        height: 41px;
+        margin: 38px auto 0px auto;
         font-size: 14px;
-        line-height: 31px;
+        line-height: 41px;
         text-align: center;
-        color: #fff;
-        border-radius: 6px;
+        border-radius: 4px;
         cursor: pointer;
+        background-color: #469dff;
+        color: #daebff;
+        &.active {
+          background-color: #157df2;
+          color: #fff;
+        }
       }
     }
   }
+}
 </style>

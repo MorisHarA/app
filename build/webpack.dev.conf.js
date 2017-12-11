@@ -21,11 +21,6 @@ module.exports = merge(baseWebpackConfig, {
     new webpack.DefinePlugin({
       'process.env': config.dev.env
     }),
-    new webpack.ProvidePlugin({
-      //if config externals here cannot config
-      axios:'axios',
-      _:'lodash'
-    }),
     // https://github.com/glenjamin/webpack-hot-middleware#installation--usage
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),

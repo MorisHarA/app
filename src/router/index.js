@@ -1,91 +1,56 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+import Vue from 'vue';
+import Router from 'vue-router';
+import Auth from 'authorize';
+import routes from './routes';
+import store from '../store';
 
-Vue.use(Router)
 
+Vue.use(Router);
 
-const routes = [
-  {
-    path: '/',
-    redirect: {
-      name: 'login'
-    }
-  },
-  {
-    path: '/login',
-    name: 'login',
-    component(resolve) {
-      require(['components/login/main'], resolve)
-    }
-  },
-  {
-    path: '/hospital',
-    name: 'hospital',
-    component(resolve) {
-      require(['components/hospital/main'], resolve)
-    },
-    redirect: {
-      name: 'commentstat'
-    },
-    children: [
-      {
-        path: 'commentstat',
-        name: 'commentstat',
-        component(resolve) {
-          require(['components/review/total'], resolve)
-        }
-      },
-      {
-        path: 'commentdetail',
-        name: 'commentdetail',
-        component(resolve) {
-          require(['components/review/detail'], resolve)
-        }
-      },
-      {
-        path: 'questionnairestat',
-        name: 'questionnairestat',
-        component(resolve) {
-          require(['components/questionnairestat/main'], resolve)
-        }
-      },
-      {
-        path: 'questionnairedetail',
-        name: 'questionnairedetail',
-        component(resolve) {
-          require(['components/questionnairedetail/main'], resolve)
-        }
-      },
-      {
-        path: 'detail',
-        name: 'detail',
-        component(resolve) {
-          require(['components/detail/main'], resolve)
-        }
-      },
-      {
-        path: 'modifypassword',
-        name: 'modifypassword',
-        component(resolve) {
-          require(['components/modifypassword/main'], resolve)
-        }
-      },
-    ]
-  },
-  {
-    path:'*',
-    component(resolve) {
-      require(['components/common/404/main'], resolve)
-    }
-  }
-]
-
+const base = process.env.NODE_ENV !== 'production' ? '' : 'wise/his';
 
 const router = new Router({
-  mode: 'history', //html5模式
-  base: '/wise/his',
-  routes
-})
+  mode: 'history',
+  base,
+  routes,
+  scrollBehavior: (to, from, savedPosition) => {
+    if (savedPosition) {
+      return savedPosition;
+    }
+    return {
+      x: 0,
+      y: 0,
+    };
+  },
+});
 
-export default router
+router.beforeEach((to, from, next) => {
+  if (to.name === 'login' && Auth.checkAuthorized()) {
+    next({
+      name: 'hospital',
+    });
+  } else if (to.matched.some(record => record.meta.requireAuth)) {
+    store.dispatch('login/fetchManagerAuth').then((authlist) => {
+      if (!Auth.checkAuthorized()) { // first level
+        Auth.unauthorized(to);
+      } else if (to.name === 'hospital') {
+        next({
+          name: store.getters['hospital/redirect'],
+        });
+      } else if (
+        authlist.every(i => i !== to.name && i !== to.meta.parent) // second level
+      ) {
+        next({
+          name: 'error',
+        });
+      } else {
+        next();
+      }
+    });
+  } else {
+    next();
+  }
+});
 
+
+export default router;

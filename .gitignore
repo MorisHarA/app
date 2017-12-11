@@ -67,4 +67,6 @@ spec/fixtures/evil-files/
 out/
 /electron/
 
+#VScode
+.eslintrc.json
 

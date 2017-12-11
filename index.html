@@ -1,8 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
   <head>
     <meta charset="utf-8">
-    <title>wis-his</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="description" content="医院智能标签系统">
+    <meta name="keywords" content="医院，智能，系统">
+    <title>医院智能标签系统</title>
+    <link rel="shortcut icon" href="/wise/his/static/favicon.ico"/>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/iview/2.7.4/styles/iview.css" rel="stylesheet">
+    <script>
+      var version = null;
+      function checkIsLowExplore(){
+        var Sys = {};
+        var ua = navigator.userAgent.toLowerCase();
+        var s;
+        (s = ua.match(/rv:([\d.]+)\) like gecko/)) ? Sys.ie = s[1] :
+        (s = ua.match(/msie ([\d\.]+)/)) ? Sys.ie = s[1] :
+        (s = ua.match(/firefox\/([\d\.]+)/)) ? Sys.firefox = s[1] :
+        (s = ua.match(/(?:opera|opr).([\d\.]+)/)) ? Sys.opera = s[1] :
+        (s = ua.match(/chrome\/([\d\.]+)/)) ? Sys.chrome = s[1] :
+        (s = ua.match(/version\/([\d\.]+).*safari/)) ? Sys.safari = s[1] : 0;
+        // 根据关系进行判断
+        if (Sys.ie) version = 'IE' + Sys.ie;
+        if (Sys.ie && +Sys.ie.split('.')[0] < 9) return 'IE' + Sys.ie;
+        if (Sys.firefox) version = 'Firefox' + Sys.firefox;
+        if (Sys.firefox && +(Sys.firefox.split('.')[0]+'.'+Sys.firefox.split('.')[1]) < 4.0 ) return 'Firefox' + Sys.firefox;
+        if (Sys.chrome) version = 'Chrome' + Sys.chrome;
+        if (Sys.chrome && +Sys.chrome.split('.')[0] < 5) return 'Chrome' + Sys.chrome;
+        if (Sys.opera) version = 'Opera' + Sys.opera;
+        if (Sys.opera && +(Sys.opera.split('.')[0]+'.'+Sys.opera.split('.')[1]) < 11.6) return 'Opera' + Sys.opera;
+        if (Sys.safari) version = 'Safari' + Sys.safari;
+        if (Sys.safari && +(Sys.safari.split('.')[0]+'.'+Sys.safari.split('.')[1]) < 5.1) return 'Safari' + Sys.safari;
+      }
+      // Safari: 10.0.3
+      // Chrome: 58.0.3029.110
+      // Firefox: 55.0
+      var isLowExplore = checkIsLowExplore();
+      console.log(version);
+      if (isLowExplore) {
+        window.location.href = "/wise/his/static/checkBrower.html?version=" + version;
+      }
+    </script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/lodash.js/4.17.4/lodash.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/moment.js/2.18.1/moment.min.js"></script>
+    <script type="text/javascript" src="https://a.alipayobjects.com/g/datavis/g2/2.3.12/index.js"></script>
   </head>
   <body>
     <div id="app"></div>

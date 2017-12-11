@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="description" content="医院智能标签系统">
+    <meta name="keywords" content="医院，智能，系统">
+    <title>医院智能标签系统</title>
+    <link rel="shortcut icon" href="/wise/his/static/favicon.ico"/>
+    <style type="text/css">
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .browser-version-container {
+        width: 100%;
+        min-height: 100vh;
+        background-color: #fff;
+      }
+      .browser-version-container h1 {
+        font-size: 17px;
+        font-weight: normal;
+        color: #333333;
+        text-align: center;
+      }
+      .browser-version-container h2 {
+        font-size: 13px;
+        font-weight: normal;
+        color: #333333;
+        text-align: center;
+        margin-top: 8px;
+        margin-bottom: 56px;
+      }
+      .browser-version-container img {
+        width: 126px;
+        display: block;
+        margin: 47px auto 13px auto;
+      }
+      .browser-version-container #update-browser {
+        display: inline-block;
+        width: 100px;
+        height: 32px;
+        line-height: 32px;
+        text-align: center;
+        border-radius: 3px;
+        color: #fff;
+        background-color: #2878dd;
+        font-size: 14px;
+        position: relative;
+        margin-left: 50%;
+        left: -108px;
+        top: 0px;
+        cursor: pointer;
+      }
+      .browser-version-container #redirect {
+        display: inline-block;
+        width: 100px;
+        height: 32px;
+        line-height: 32px;
+        text-align: center;
+        border: 1px solid #2878dd;
+        border-radius: 3px;
+        color: #2878dd;
+        font-size: 14px;
+        margin-left: 10px;
+        position: relative;
+        left: -108px;
+        top: 0px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="browser-version-container">
+      <img src="/wise/his/static/img/warn.png" >
+      <h1>您当前浏览器版本过低！</h1>
+      <h2>无法使用新版管理后台</h2>
+      <div id="update-browser">升级浏览器</div>
+      <div id="redirect">使用旧版</div>
+    </div>
+  </body>
+  <script>
+    document.getElementById('update-browser').onclick = function() {
+      window.location.href = 'http://www.highwho.com/asserts/soft/ChromeSetup.exe';
+    }
+    document.getElementById('redirect').onclick = function() {
+      window.location.href = 'https://api.w-se.cn/wise/his/login';
+    }
+  </script>
+</html>

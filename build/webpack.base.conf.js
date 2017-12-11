@@ -18,7 +18,15 @@ module.exports = {
       ? config.build.assetsPublicPath
       : config.dev.assetsPublicPath
   },
-  
+  externals: {
+    moment: 'moment',
+    lodash : {
+      commonjs: "lodash",
+      amd: "lodash",
+      root: "_" // indicates global variable
+    },
+    g2: 'G2'
+  },
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {
@@ -26,7 +34,13 @@ module.exports = {
       'src': resolve('src'),
       'components': resolve('src/components'),
       'assets': resolve('src/assets'),
-      'store': resolve('src/store')
+      'store': resolve('src/store'),
+      'filters': resolve('src/filters'),
+      'api': resolve('src/service/api'),
+      'service': resolve('src/service'),
+      'router': resolve('src/router'),
+      'utils': resolve('src/utils'),
+      'authorize': resolve('src/utils/authorize.js')
     }
   },
   module: {
